@@ -1,18 +1,18 @@
-package application;
+package application.HW2;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public abstract class Shape {
+public abstract class Shape implements ShapePositionInterface {
 
 	/** member variables */
 	private double x, y;
 	private Color color;
 	
-	protected Shape(double x2, double y2, Color color)
+	protected Shape(double x, double y, Color color)
 	{
-		setX(x2);
-		setY(y2);
+		setX(x);
+		setY(y);
 		setColor(color);
 	}
 	
@@ -21,6 +21,13 @@ public abstract class Shape {
 	{
 		gc.setFill(this.getColor());
 	}
+	
+	@Override
+	public double distanceTo(double x, double y) {
+		return Math.sqrt(Math.pow(x - this.getX(), 2) + Math.pow(y - this.getY(), 2));
+	}
+	
+	public abstract Rectangle getBoundingBox();
 	
 	public abstract String toString(); // converts an object to a string
 	
@@ -33,6 +40,12 @@ public abstract class Shape {
 	public void setY(double y)
 	{
 		this.y = y;
+	}
+	
+	@Override
+	public void moveTo(double dx, double dy) {
+		setX(this.getX() + dx);
+		setY(this.getY() + dy);
 	}
 	
 	public void setColor(Color color)
@@ -51,10 +64,17 @@ public abstract class Shape {
 		return this.y;
 	}
 	
+	@Override
+	public double[] getPoint() {
+		double point[] = new double[2];
+		point[0] = this.getX();
+		point[1] = this.getY();
+		return point;
+	}
+	
 	public Color getColor()
 	{
 		return this.color;
 	}
-	
 	
 }

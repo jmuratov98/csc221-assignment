@@ -1,4 +1,4 @@
-package application;
+package application.HW1;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
